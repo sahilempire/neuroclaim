@@ -62,13 +62,16 @@ const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 async function analyzeQuery(query: string): Promise<AIAnalysisResult> {
   const normalizedQuery = query.toLowerCase();
 
-  // Keyword-based external link logic
+  // Expanded keyword-based external link logic
   let externalLink: { url: string; label: string } | undefined = undefined;
-  if (/(trademark|patent)/.test(normalizedQuery)) {
+  // Radar NeuralArc (IP/Trademark/Patent)
+  if (/(trademark|patent|intellectual property|\bip\b|register brand|register logo|brand name|logo|invention|innovation|protect idea|file patent|patent search|patent filing|patent registration|patent status|patent renewal|patent attorney|patent agent|patent help|patent support|patent advice|patent law|patent office|patent application|patent process|patent cost|patent dispute|patent infringement|patent protection|patent claim|patent draft|patent document|patent form)/.test(normalizedQuery)) {
     externalLink = { url: 'https://radar.neuralarc.ai/', label: 'Radar NeuralArc (IP/Trademark/Patent)' };
-  } else if (/(legal draft|draft|agreement|contract|document)/.test(normalizedQuery)) {
+  // LawBit (Legal Drafts & Agreements)
+  } else if (/(legal draft|draft|agreement|contract|document|nda|non-disclosure|create|write|generate|legal doc|legal document|employment agreement|service agreement|partnership deed|privacy policy|review|edit|modify|template|sample|fill|prepare|make|customize|letter|memorandum|mou|lease|rental|will|deed|affidavit|power of attorney|document check|document risk|document summary)/.test(normalizedQuery)) {
     externalLink = { url: 'https://lawbit.ai/', label: 'LawBit (Legal Drafts & Agreements)' };
-  } else if (/(compliance|regulation|policy)/.test(normalizedQuery)) {
+  // Compli AI Shield (Compliance)
+  } else if (/(compliance|regulation|policy|gdpr|privacy|data protection|legal compliance|regulatory|audit|risk|risk management|legal risk|compliance checklist|compliance audit|compliance report|compliance tool|compliance software|compliance help|compliance support|compliance advice|compliance law|compliance officer|compliance team|compliance department|compliance process|compliance program|compliance training|compliance update|compliance requirement|compliance standard|compliance rules|compliance guideline|compliance framework)/.test(normalizedQuery)) {
     externalLink = { url: 'https://compli-ai-shield.vercel.app/', label: 'Compli AI Shield (Compliance)' };
   }
 

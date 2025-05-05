@@ -16,10 +16,16 @@ const Index = () => {
     setLoading(true);
 
     // Simulate AI processing delay
-    setTimeout(() => {
-      const result = legalAI.analyzeQuery(message);
-      setAiResult(result);
-      setLoading(false);
+    setTimeout(async () => {
+      try {
+        const result = await legalAI.analyzeQuery(message);
+        setAiResult(result);
+      } catch (error) {
+        console.error('Error analyzing query:', error);
+        setAiResult(null);
+      } finally {
+        setLoading(false);
+      }
     }, 800);
   };
 
