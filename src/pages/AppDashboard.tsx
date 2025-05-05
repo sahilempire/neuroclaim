@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import AIInputBox from '@/components/AIInputBox';
 import AIParticles from '@/components/AIParticles';
 import AIResponse from '@/components/AIResponse';
+import LegalBackgroundIcons from '@/components/LegalBackgroundIcons';
 import legalAI, { AIAnalysisResult } from '@/services/legalAI';
 
 const AppDashboard = () => {
@@ -24,6 +25,7 @@ const AppDashboard = () => {
     <div className="min-h-screen flex flex-col bg-legal-navy">
       <div className="relative overflow-hidden min-h-screen">
         <AIParticles />
+        <LegalBackgroundIcons />
         
         {/* App Header */}
         <header className="container mx-auto px-4 py-6 flex items-center justify-between z-10 relative">
