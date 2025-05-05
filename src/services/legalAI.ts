@@ -1,3 +1,4 @@
+import axios from 'axios';
 
 /**
  * Mock AI service to analyze user queries and suggest legal services
@@ -52,34 +53,72 @@ export interface LegalServiceSuggestion {
 export interface AIAnalysisResult {
   message: string;
   suggestedServices: LegalServiceSuggestion[];
+  externalLink?: { url: string; label: string };
 }
 
-// Simple keyword matching algorithm
-function analyzeQuery(query: string): AIAnalysisResult {
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+
+async function analyzeQuery(query: string): Promise<AIAnalysisResult> {
   const normalizedQuery = query.toLowerCase();
-  
-  // Calculate relevance for each service
+
+  // Keyword-based external link logic
+  let externalLink: { url: string; label: string } | undefined = undefined;
+  if (/(trademark|patent)/.test(normalizedQuery)) {
+    externalLink = { url: 'https://radar.neuralarc.ai/', label: 'Radar NeuralArc (IP/Trademark/Patent)' };
+  } else if (/(legal draft|draft|agreement|contract|document)/.test(normalizedQuery)) {
+    externalLink = { url: 'https://lawbit.ai/', label: 'LawBit (Legal Drafts & Agreements)' };
+  } else if (/(compliance|regulation|policy)/.test(normalizedQuery)) {
+    externalLink = { url: 'https://compli-ai-shield.vercel.app/', label: 'Compli AI Shield (Compliance)' };
+  }
+
+  // OpenAI API call
+  let message = '';
+  let systemPrompt = 'You are a highly creative, friendly, and persuasive legal AI assistant. Always provide helpful, engaging, and actionable advice. If a recommended service link is provided, encourage the user to visit it for the best results. Reply in 1–2 sentences. Be concise, energetic, and encourage the user to click the recommended link.';
+  if (externalLink) {
+    systemPrompt += `\nFor this query, the best resource is: ${externalLink.label} (${externalLink.url}). Persuasively explain why the user should visit this link for more information or to take action, but keep your response very short.`;
+  }
+  try {
+    const response = await axios.post(
+      OPENAI_API_URL,
+      {
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: query }
+        ],
+        max_tokens: 60
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${OPENAI_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    message = response.data.choices[0].message.content.trim();
+  } catch (err: any) {
+    if (err.response && err.response.status === 429) {
+      message = 'You are making requests too quickly. Please wait a few seconds before trying again.';
+    } else {
+      message = 'Sorry, I could not process your request at the moment.';
+    }
+  }
+
+  // Use the old keyword matching for suggested services
   const scoredServices = legalServices.map(service => {
     let score = 0;
-    
-    // Check for keyword matches
     service.keywords.forEach(keyword => {
       if (normalizedQuery.includes(keyword.toLowerCase())) {
-        // Keywords in title are more important
         score += service.title.toLowerCase().includes(keyword.toLowerCase()) ? 10 : 5;
       }
     });
-    
-    // Boost score if the service title is directly mentioned
     if (normalizedQuery.includes(service.title.toLowerCase())) {
       score += 15;
     }
-    
-    // Boost score for the service ID being mentioned
     if (normalizedQuery.includes(service.id.toLowerCase())) {
       score += 20;
     }
-    
     return {
       title: service.title,
       description: service.description,
@@ -87,24 +126,12 @@ function analyzeQuery(query: string): AIAnalysisResult {
       relevanceScore: score
     };
   });
-  
-  // Filter to services with some relevance
   const suggestedServices = scoredServices.filter(service => service.relevanceScore > 0);
-  
-  // Generate response message based on matches
-  let message = "";
-  
-  if (suggestedServices.length === 0) {
-    message = "I understand you're looking for legal assistance. Could you please provide more details about your specific legal needs? For example, are you interested in patents, trademarks, legal document drafting, or compliance solutions?";
-  } else if (suggestedServices.length === 1) {
-    message = `Based on your query, I believe our ${suggestedServices[0].title} would be perfect for your needs. Would you like more information about this service?`;
-  } else {
-    message = "Based on your query, I've identified several services that might help you. Please take a look at these recommendations:";
-  }
-  
+
   return {
     message,
-    suggestedServices
+    suggestedServices,
+    externalLink
   };
 }
 

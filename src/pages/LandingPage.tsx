@@ -207,7 +207,7 @@ const LandingPage = () => {
             About <span className="text-legal-teal">MindfulLegal</span>
           </h2>
           <p className="text-gray-300 mb-6">
-            MindfulLegal was founded by a team of legal experts and AI specialists with the mission to make legal services more accessible, efficient, and affordable. Our AI-powered platform helps businesses and individuals navigate complex legal landscapes with ease.
+            NeuroClaim was founded by a team of legal experts and AI specialists with the mission to make legal services more accessible, efficient, and affordable. Our AI-powered platform helps businesses and individuals navigate complex legal landscapes with ease.
           </p>
           <Link to="/app" className="inline-flex items-center gap-2 bg-legal-teal hover:bg-opacity-90 text-white px-6 py-3 rounded-md transition-all transform hover:translate-y-[-2px]">
             Try Our AI Assistant <ArrowRight className="w-4 h-4" />
