@@ -96,9 +96,10 @@
     transform: translateY(0) rotate(0deg);
   }
   50% {
-    transform: translateY(-10px) rotate(5deg);
+    transform: translateY(-8px) rotate(2deg);
   }
   100% {
-    transform: translateY(5px) rotate(-5deg);
+    transform: translateY(4px) rotate(-2deg);
   }
 }
+
