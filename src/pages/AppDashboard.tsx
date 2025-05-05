@@ -1,6 +1,5 @@
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import LegalNav from '@/components/LegalNav';
 import AIInputBox from '@/components/AIInputBox';
 import AIParticles from '@/components/AIParticles';
 import AIResponse from '@/components/AIResponse';
@@ -23,32 +22,23 @@ const AppDashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-legal-navy">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden min-h-screen">
         <AIParticles />
         
-        {/* App Header with Back button */}
+        {/* App Header */}
         <header className="container mx-auto px-4 py-6 flex items-center justify-between z-10 relative">
-          <Link to="/" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Back to Home
-          </Link>
-          
           <h1 className="text-xl font-serif font-bold">
             <span className="text-legal-teal">Mindful</span>
             <span className="text-white">Legal</span>
           </h1>
           
-          <div>
-            <button className="px-4 py-2 bg-legal-teal text-white rounded-md hover:bg-opacity-90 transition duration-200">
-              Login
-            </button>
-          </div>
+          <button className="px-4 py-2 bg-legal-teal text-white rounded-md hover:bg-opacity-90 transition duration-200">
+            Login
+          </button>
         </header>
         
         {/* Hero Section with AI Input */}
-        <section className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+        <section className="container mx-auto px-4 py-16 md:py-24 relative z-10 flex-grow flex flex-col justify-center">
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               <span className="gradient-text">AI-Powered</span> Legal Assistance
