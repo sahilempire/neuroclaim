@@ -142,7 +142,7 @@ const AIInputBox: React.FC<AIInputBoxProps> = ({
         )}
       </form>
       <p className="text-xs text-gray-500 mt-2 text-center">
-        NeuroClaim AI helps navigate your legal needs
+        NeuralClaim AI helps navigate your legal needs
       </p>
     </div>
   );

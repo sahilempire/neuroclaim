@@ -66,7 +66,7 @@ const AppDashboard = () => {
                   animationSpeed={3}
                   showBorder={false}
                 >
-                  Neuro
+                  Neural
                 </GradientText>
                 <span className="text-white">Claim</span>
               </h1>
@@ -98,7 +98,7 @@ const AppDashboard = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2025 NeuroClaim. All rights reserved.
+              © 2025 NeuralClaim. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-gray-400 hover:text-[#40B2A8]">Privacy Policy</a>

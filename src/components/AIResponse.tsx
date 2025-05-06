@@ -65,7 +65,7 @@ const AIResponse: React.FC<AIResponseProps> = ({
               </svg>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white tracking-wide">NeuroClaim AI</h3>
+              <h3 className="text-lg font-bold text-white tracking-wide">NeuralClaim AI</h3>
               <p className="text-xs text-legal-teal font-semibold">Your Legal Copilot</p>
             </div>
           </div>
