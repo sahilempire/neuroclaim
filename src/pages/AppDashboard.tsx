@@ -34,15 +34,18 @@ const AppDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-legal-navy">
+    <div className="min-h-screen flex flex-col bg-black">
       <div className="relative overflow-hidden min-h-screen">
-        {/* Animated Gradient Background */}
+        {/* Enhanced Animated White Gradient Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute left-1/2 bottom-0 w-[120vw] h-[60vh] -translate-x-1/2" style={{
-            background: 'radial-gradient(ellipse at 30% 100%, #1de9b6cc 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, #2979ffcc 0%, transparent 60%)',
-            filter: 'blur(24px)',
-            animation: 'moveGradient 8s ease-in-out infinite alternate',
-            opacity: 0.85
+          <div className="absolute left-1/2 top-[-20vh] w-[200vw] h-[100vh] -translate-x-1/2" style={{
+            background: `
+              radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.25) 60%, transparent 100%),
+              radial-gradient(ellipse 100% 80% at 50% 0%, rgba(41,121,255,0.12) 0%, transparent 80%)
+            `,
+            filter: 'blur(32px)',
+            opacity: 1,
+            transition: 'opacity 1.5s cubic-bezier(.4,0,.2,1)'
           }} />
         </div>
         {/* Add this keyframes style globally if not present */}
@@ -57,16 +60,16 @@ const AppDashboard = () => {
         {/* Hero Section with AI Input */}
         <section className="container mx-auto px-4 pt-16 pb-10 md:pt-24 md:pb-16 relative z-10 flex flex-col items-center justify-center text-center flex-grow animate-fade-in">
           <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
-            <div className="flex items-center justify-center mb-6">
-              {/* Neural network icon */}
-              <svg className="w-10 h-10 mr-3 text-legal-teal drop-shadow-lg animate-pulse" fill="none" viewBox="0 0 32 32" stroke="currentColor" strokeWidth="1.5">
+            {/* Neural network icon centered above heading */}
+            <div className="flex flex-col items-center justify-center mb-2">
+              <svg className="w-14 h-14 text-legal-teal drop-shadow-lg animate-pulse mb-4" fill="none" viewBox="0 0 32 32" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="16" cy="16" r="15" strokeOpacity="0.3" />
                 <circle cx="16" cy="16" r="7" strokeOpacity="0.5" />
                 <circle cx="16" cy="16" r="2.5" fill="#1de9b6" stroke="none" />
                 <path d="M16 2v4M16 26v4M2 16h4M26 16h4M7.5 7.5l2.5 2.5M22 22l2.5 2.5M7.5 24.5l2.5-2.5M22 10l2.5-2.5" strokeOpacity="0.5" />
               </svg>
               <h1 className="text-6xl md:text-7xl font-extrabold drop-shadow-[0_4px_32px_rgba(29,233,182,0.5)] animate-gradient-wave flex flex-wrap justify-center items-center whitespace-nowrap">
-                <span className="bg-gradient-to-r from-legal-teal via-blue-400 to-legal-teal text-transparent bg-clip-text">Neuro</span><span className="text-white">Claim</span>
+                <span className="bg-gradient-to-tl from-legal-teal via-blue-400 to-legal-teal text-transparent bg-clip-text">Neuro</span><span className="text-white">Claim</span>
               </h1>
             </div>
             <div className="w-28 h-1 rounded-full bg-gradient-to-r from-legal-teal via-blue-400 to-legal-teal mb-8 animate-pulse shadow-lg" />

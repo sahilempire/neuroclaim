@@ -61,7 +61,7 @@ const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
 async function analyzeQuery(query: string): Promise<AIAnalysisResult> {
   const normalizedQuery = query.toLowerCase();
-
+  
   // Expanded keyword-based external link logic
   let externalLink: { url: string; label: string } | undefined = undefined;
   // Radar NeuralArc (IP/Trademark/Patent)
@@ -130,7 +130,7 @@ async function analyzeQuery(query: string): Promise<AIAnalysisResult> {
     };
   });
   const suggestedServices = scoredServices.filter(service => service.relevanceScore > 0);
-
+  
   return {
     message,
     suggestedServices,
