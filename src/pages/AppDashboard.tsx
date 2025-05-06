@@ -4,6 +4,8 @@ import AIParticles from '@/components/AIParticles';
 import AIResponse from '@/components/AIResponse';
 import LegalBackgroundIcons from '@/components/LegalBackgroundIcons';
 import legalAI, { AIAnalysisResult } from '@/services/legalAI';
+import Aurora from '@/components/Aurora';
+import GradientText from '@/components/GradientText';
 
 const AppDashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -36,25 +38,15 @@ const AppDashboard = () => {
   return (
     <div className="min-h-screen flex flex-col bg-black">
       <div className="relative overflow-hidden min-h-screen">
-        {/* Enhanced Animated White Gradient Background */}
+        {/* Animated Aurora Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute left-1/2 top-[-20vh] w-[200vw] h-[100vh] -translate-x-1/2" style={{
-            background: `
-              radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.25) 60%, transparent 100%),
-              radial-gradient(ellipse 100% 80% at 50% 0%, rgba(41,121,255,0.12) 0%, transparent 80%)
-            `,
-            filter: 'blur(32px)',
-            opacity: 1,
-            transition: 'opacity 1.5s cubic-bezier(.4,0,.2,1)'
-          }} />
+          <Aurora
+            colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+            blend={0.5}
+            amplitude={1.0}
+            speed={0.5}
+          />
         </div>
-        {/* Add this keyframes style globally if not present */}
-        {/*
-        @keyframes moveGradient {
-          0% { transform: translateX(-10%) scale(1); }
-          100% { transform: translateX(10%) scale(1.05); }
-        }
-        */}
         <AIParticles />
         <LegalBackgroundIcons />
         {/* Hero Section with AI Input */}
@@ -68,13 +60,20 @@ const AppDashboard = () => {
                 <circle cx="16" cy="16" r="2.5" fill="#1de9b6" stroke="none" />
                 <path d="M16 2v4M16 26v4M2 16h4M26 16h4M7.5 7.5l2.5 2.5M22 22l2.5 2.5M7.5 24.5l2.5-2.5M22 10l2.5-2.5" strokeOpacity="0.5" />
               </svg>
-              <h1 className="text-6xl md:text-7xl font-extrabold drop-shadow-[0_4px_32px_rgba(29,233,182,0.5)] animate-gradient-wave flex flex-wrap justify-center items-center whitespace-nowrap">
-                <span className="bg-gradient-to-tl from-legal-teal via-blue-400 to-legal-teal text-transparent bg-clip-text">Neuro</span><span className="text-white">Claim</span>
+              <h1 className="text-6xl md:text-7xl font-extrabold drop-shadow-[0_4px_32px_rgba(64,178,168,0.5)] animate-gradient-wave flex flex-wrap justify-center items-center whitespace-nowrap">
+                <GradientText
+                  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                  animationSpeed={3}
+                  showBorder={false}
+                >
+                  Neuro
+                </GradientText>
+                <span className="text-white">Claim</span>
               </h1>
             </div>
-            <div className="w-28 h-1 rounded-full bg-gradient-to-r from-legal-teal via-blue-400 to-legal-teal mb-8 animate-pulse shadow-lg" />
+            <div className="w-28 h-1 rounded-full bg-gradient-to-r from-[#315C59] via-[#40B2A8] to-[#315C59] mb-8 animate-pulse shadow-lg" />
             <p className="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl animate-fade-in text-center">
-              Unlock AI-Powered Legal Brilliance for Instantly Navigate <span className="text-legal-teal font-semibold">Patents</span>, <span className="text-legal-teal font-semibold">Trademarks</span>, <span className="text-legal-teal font-semibold">Contracts</span>, and <span className="text-legal-teal font-semibold">Compliance</span> with NeuralARC.
+              Unlock AI-Powered Legal Brilliance for Instantly Navigate <span className="text-[#40B2A8] font-semibold">Patents</span>, <span className="text-[#40B2A8] font-semibold">Trademarks</span>, <span className="text-[#40B2A8] font-semibold">Contracts</span>, and <span className="text-[#40B2A8] font-semibold">Compliance</span> with NeuralARC.
             </p>
             <AIInputBox 
               onSubmit={handleSubmit} 
@@ -102,9 +101,9 @@ const AppDashboard = () => {
               © 2025 NeuroClaim. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-legal-teal">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-legal-teal">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-legal-teal">Contact</a>
+              <a href="#" className="text-gray-400 hover:text-[#40B2A8]">Privacy Policy</a>
+              <a href="#" className="text-gray-400 hover:text-[#40B2A8]">Terms of Service</a>
+              <a href="#" className="text-gray-400 hover:text-[#40B2A8]">Contact</a>
             </div>
           </div>
         </div>
