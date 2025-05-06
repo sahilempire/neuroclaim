@@ -1,11 +1,33 @@
 import React, { useState, useRef, useEffect } from 'react';
 import AIInputBox from '@/components/AIInputBox';
-import AIParticles from '@/components/AIParticles';
 import AIResponse from '@/components/AIResponse';
-import LegalBackgroundIcons from '@/components/LegalBackgroundIcons';
 import legalAI, { AIAnalysisResult } from '@/services/legalAI';
-import Aurora from '@/components/Aurora';
-import GradientText from '@/components/GradientText';
+
+const IndexLogo = ({ width = 220, height = 60 }: { width?: number; height?: number }) => (
+  <img 
+    src="/lawbit-logo.svg" 
+    alt="LawBit Logo" 
+    width={width} 
+    height={height} 
+    className="mx-auto my-8"
+    style={{ filter: 'drop-shadow(0 2px 16px #fff8)', maxWidth: '100%' }}
+  />
+);
+
+const features = [
+  {
+    title: 'AI for Drafting',
+    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.'
+  },
+  {
+    title: 'AI for Compliance',
+    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.'
+  },
+  {
+    title: 'AI for Trademark',
+    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.'
+  }
+];
 
 const AppDashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -22,67 +44,140 @@ const AppDashboard = () => {
   const handleSubmit = async (message: string) => {
     if (loading || cooldown) return;
     setLoading(true);
-    console.log('Sending request to OpenAI...');
     const result = await legalAI.analyzeQuery(message);
     setAiResult(result);
     setLoading(false);
-    // Only set cooldown if not a rate limit error
     if (!result.message.includes('You are making requests too quickly')) {
       setCooldown(true);
-      setTimeout(() => setCooldown(false), 5000); // 5 seconds cooldown
-    } else {
-      console.warn('Received 429 rate limit error from OpenAI');
+      setTimeout(() => setCooldown(false), 5000);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-black">
-      <div className="relative overflow-hidden min-h-screen">
-        {/* Animated Aurora Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <Aurora
-            colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
-            blend={0.5}
-            amplitude={1.0}
-            speed={0.5}
-          />
-        </div>
-        <AIParticles />
-        <LegalBackgroundIcons />
-        {/* Hero Section with AI Input */}
-        <section className="container mx-auto px-4 pt-16 pb-10 md:pt-24 md:pb-16 relative z-10 flex flex-col items-center justify-center text-center flex-grow animate-fade-in">
-          <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto">
-            {/* Neural network icon centered above heading */}
-            <div className="flex flex-col items-center justify-center mb-2">
-              <svg className="w-14 h-14 text-legal-teal drop-shadow-lg animate-pulse mb-4" fill="none" viewBox="0 0 32 32" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="16" cy="16" r="15" strokeOpacity="0.3" />
-                <circle cx="16" cy="16" r="7" strokeOpacity="0.5" />
-                <circle cx="16" cy="16" r="2.5" fill="#1de9b6" stroke="none" />
-                <path d="M16 2v4M16 26v4M2 16h4M26 16h4M7.5 7.5l2.5 2.5M22 22l2.5 2.5M7.5 24.5l2.5-2.5M22 10l2.5-2.5" strokeOpacity="0.5" />
-              </svg>
-              <h1 className="text-6xl md:text-7xl font-extrabold drop-shadow-[0_4px_32px_rgba(64,178,168,0.5)] animate-gradient-wave flex flex-wrap justify-center items-center whitespace-nowrap">
-                <GradientText
-                  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                  animationSpeed={3}
-                  showBorder={false}
-                >
-                  Neural
-                </GradientText>
-                <span className="text-white">Claim</span>
-              </h1>
-            </div>
-            <div className="w-28 h-1 rounded-full bg-gradient-to-r from-[#315C59] via-[#40B2A8] to-[#315C59] mb-8 animate-pulse shadow-lg" />
-            <p className="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl animate-fade-in text-center">
-              Unlock AI-Powered Legal Brilliance for Instantly Navigate <span className="text-[#40B2A8] font-semibold">Patents</span>, <span className="text-[#40B2A8] font-semibold">Trademarks</span>, <span className="text-[#40B2A8] font-semibold">Contracts</span>, and <span className="text-[#40B2A8] font-semibold">Compliance</span> with NeuralARC.
-            </p>
+    <div className="min-h-screen w-full flex flex-col items-center justify-between bg-[#f7f7f3] font-sans">
+      <main className="flex-1 flex flex-col items-center justify-center w-full">
+        <div
+          className="w-full max-w-[96vw] min-h-[98vh] rounded-3xl shadow-2xl px-2 md:px-4 py-4 md:py-8 mx-auto flex flex-col items-center relative overflow-hidden mt-4 md:mt-8"
+          style={{
+            backgroundImage: 'url(/hero.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
+          <div className="relative z-10 flex flex-col items-center justify-center w-full">
+            <IndexLogo />
+            <h1
+              className="mb-10 max-w-3xl mx-auto text-center"
+              style={{
+                fontFamily: 'Fustat, sans-serif',
+                fontWeight: 400,
+                fontSize: '24px',
+                lineHeight: '42px',
+                letterSpacing: 0,
+                color: 'white',
+                textAlign: 'center'
+              }}
+            >
+              Unlock AI-Powered Legal Brilliance for Instantly Navigate Patents, Trademarks, Contracts, and Compliance with NeuralArc.
+            </h1>
+            {/* AI Input/Response Section (Search Bar) */}
             <AIInputBox 
               onSubmit={handleSubmit} 
               loading={loading}
-              className="w-full max-w-2xl"
+              className="w-full max-w-4xl mb-12 [&>form]:bg-[#252323AD] [&>form]:rounded-2xl [&>form]:shadow-none [&>form]:border-none [&>form]:text-white [&>form]:placeholder-white/90 [&>form]:focus:ring-0 [&>form]:focus:outline-none [&>form]:px-6 [&>form]:h-14 [&>form]:flex [&>form]:items-center [&>form]:text-[22px] [&>form]:font-normal [&>p]:hidden [&>form>*]:text-white [&>form>svg]:text-white [&>form>button]:text-white [&>form]:backdrop-blur-sm [&>form]:shadow-[-5px_-7px_16.6px_0px_#3D3D3D40_inset] [&>form]:rounded-[8px]"
             />
-            {/* AI Response Section */}
+            {/* Features Section */}
+            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 divide-y md:divide-y-0 md:divide-x md:pl-24 md:pr-18 divide-white/60 mb-12">
+              {/* AI for Trademark (left) */}
+              <div className="flex flex-col items-start justify-center text-left px-4 py-10 md:pr-40">
+                <h3
+                  className="text-white mb-4"
+                  style={{
+                    fontFamily: 'Fustat, sans-serif',
+                    fontWeight: 600,
+                    fontSize: '28px',
+                    lineHeight: '28.07px',
+                    letterSpacing: '-0.4%',
+                    verticalAlign: 'middle'
+                  }}
+                >
+                  {features[2].title}
+                </h3>
+                <p
+                  className="text-gray-300 mb-8"
+                  style={{
+                    fontFamily: 'Fustat, sans-serif',
+                    fontWeight: 400,
+                    fontSize: '16px',
+                    lineHeight: '24.06px',
+                    letterSpacing: 0
+                  }}
+                >
+                  {features[2].description}
+                </p>
+                <button className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</button>
+              </div>
+              {/* AI for Compliance (center, less vertical padding) */}
+              <div className="flex flex-col items-start justify-center text-left px-4 py-[30px] md:px-24">
+                <h3
+                  className="text-white mb-4"
+                  style={{
+                    fontFamily: 'Fustat, sans-serif',
+                    fontWeight: 600,
+                    fontSize: '28px',
+                    lineHeight: '28.07px',
+                    letterSpacing: '-0.4%',
+                    verticalAlign: 'middle'
+                  }}
+                >
+                  {features[1].title}
+                </h3>
+                <p
+                  className="text-gray-300 mb-8"
+                  style={{
+                    fontFamily: 'Fustat, sans-serif',
+                    fontWeight: 400,
+                    fontSize: '16px',
+                    lineHeight: '24.06px',
+                    letterSpacing: 0
+                  }}
+                >
+                  {features[1].description}
+                </p>
+                <button className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</button>
+              </div>
+              {/* AI for Legal Intelligence (right) */}
+              <div className="flex flex-col items-start justify-center text-left px-4 py-10 md:pl-24 md:pr-20">
+                <h3
+                  className="text-white mb-4"
+                  style={{
+                    fontFamily: 'Fustat, sans-serif',
+                    fontWeight: 600,
+                    fontSize: '28px',
+                    lineHeight: '28.07px',
+                    letterSpacing: '-0.4%',
+                    verticalAlign: 'middle'
+                  }}
+                >
+                  {features[0].title}
+                </h3>
+                <p
+                  className="text-gray-300 mb-8"
+                  style={{
+                    fontFamily: 'Fustat, sans-serif',
+                    fontWeight: 400,
+                    fontSize: '16px',
+                    lineHeight: '24.06px',
+                    letterSpacing: 0
+                  }}
+                >
+                  {features[0].description}
+                </p>
+                <button className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</button>
+              </div>
+            </div>
             {aiResult && (
-              <div ref={responseRef} className="w-full mt-8 max-w-2xl animate-slide-up">
+              <div ref={responseRef} className="w-full mt-8 max-w-2xl">
                 <AIResponse 
                   message={aiResult.message}
                   suggestedServices={aiResult.suggestedServices}
@@ -91,20 +186,26 @@ const AppDashboard = () => {
               </div>
             )}
           </div>
-        </section>
-      </div>
+        </div>
+      </main>
       {/* Footer */}
-      <footer className="mt-auto bg-gray-900 py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © 2025 NeuralClaim. All rights reserved.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-[#40B2A8]">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-[#40B2A8]">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-[#40B2A8]">Contact</a>
-            </div>
+      <footer className="w-full flex justify-center items-center py-0 pb-4">
+        <div className="w-full max-w-[96vw] bg-[#18181b] rounded-3xl shadow-2xl px-8 md:px-16 py-6 mx-auto flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm mt-8" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <div className="flex items-center gap-2 mb-4 md:mb-0">
+            <IndexLogo width={100} height={100} />
+            <span className="hidden md:inline-block">•</span>
+            <a href="#" className="hover:text-white transition">Terms of use</a>
+            <span>•</span>
+            <a href="#" className="hover:text-white transition">Privacy Policy</a>
+            <span>•</span>
+            <a href="#" className="hover:text-white transition">Disclaimer</a>
+            <span>•</span>
+            <a href="#" className="hover:text-white transition">Responsible AI</a>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>Copyright 2025. All rights reserved.</span>
+            <span className="hidden md:inline-block">Lawbit AI, a thing by</span>
+            <span className="font-bold text-white">NeuralArc</span>
           </div>
         </div>
       </footer>

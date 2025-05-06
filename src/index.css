@@ -53,9 +53,10 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
-    background-image: radial-gradient(circle at 50% 50%, rgba(13, 148, 136, 0.03) 0%, transparent 60%), 
-                      radial-gradient(circle at 80% 80%, rgba(13, 148, 136, 0.05) 0%, transparent 60%);
+    @apply font-sans;
+    background-color: #fff !important;
+    background-image: none !important;
+    color: #18181b;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -65,11 +66,13 @@
 
 @layer components {
   .legal-card {
-    @apply bg-gradient-to-br from-legal-navy via-legal-blue to-legal-navy p-6 rounded-xl shadow-md border border-gray-700/50 hover:shadow-glow transition-all duration-300;
+    @apply p-6 rounded-xl shadow-md border border-gray-700/50 hover:shadow-glow transition-all duration-300;
+    background: none !important;
   }
 
   .ai-input-wrapper {
-    @apply relative bg-gray-800/60 border border-gray-700 rounded-lg shadow-inner overflow-hidden;
+    @apply relative border border-gray-700 rounded-lg shadow-inner overflow-hidden;
+    background: none !important;
   }
 
   .ai-input {
@@ -77,15 +80,18 @@
   }
 
   .ai-response {
-    @apply bg-gradient-to-r from-legal-navy via-gray-800/80 to-legal-navy p-5 rounded-lg border border-gray-700/80 shadow-md;
+    @apply p-5 rounded-lg border border-gray-700/80 shadow-md;
+    background: none !important;
   }
 
   .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-legal-teal to-legal-gold animate-gradient-wave;
+    @apply text-transparent bg-clip-text;
+    background: none !important;
   }
 
   .ai-particle {
-    @apply absolute rounded-full opacity-30 bg-legal-teal animate-pulse;
+    @apply absolute rounded-full opacity-30 animate-pulse;
+    background: none !important;
   }
 }
 
