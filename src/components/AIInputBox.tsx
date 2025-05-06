@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { MessageSquare, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MessageSquare, ArrowRight, Mic } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
@@ -35,6 +35,8 @@ const AIInputBox: React.FC<AIInputBoxProps> = ({
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [typedPlaceholder, setTypedPlaceholder] = useState('');
   const [typing, setTyping] = useState(true);
+  const [listening, setListening] = useState(false);
+  const recognitionRef = useRef<any>(null);
 
   // Typing animation for placeholder
   useEffect(() => {
@@ -58,6 +60,22 @@ const AIInputBox: React.FC<AIInputBoxProps> = ({
     return () => clearTimeout(timeout);
   }, [placeholderIndex]);
 
+  // Voice input setup
+  useEffect(() => {
+    if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) return;
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    recognitionRef.current = new SpeechRecognition();
+    recognitionRef.current.continuous = false;
+    recognitionRef.current.interimResults = false;
+    recognitionRef.current.lang = 'en-US';
+    recognitionRef.current.onresult = (event: any) => {
+      setInputValue(event.results[0][0].transcript);
+      setListening(false);
+    };
+    recognitionRef.current.onend = () => setListening(false);
+    recognitionRef.current.onerror = () => setListening(false);
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) {
@@ -72,10 +90,17 @@ const AIInputBox: React.FC<AIInputBoxProps> = ({
     setInputValue('');
   };
 
+  const handleMicClick = () => {
+    if (recognitionRef.current) {
+      setListening(true);
+      recognitionRef.current.start();
+    }
+  };
+
   return (
     <div className={cn('w-full max-w-3xl mx-auto', className)}>
-      <form onSubmit={handleSubmit} className="ai-input-wrapper group flex items-center">
-        <MessageSquare className="w-5 h-5 text-gray-400 absolute left-4" />
+      <form onSubmit={handleSubmit} className="ai-input-wrapper group flex items-center" role="search">
+        <MessageSquare className="w-5 h-5 text-gray-400 absolute left-4" aria-hidden="true" />
         <input
           type="text"
           value={inputValue}
@@ -83,16 +108,38 @@ const AIInputBox: React.FC<AIInputBoxProps> = ({
           placeholder={typedPlaceholder}
           className="ai-input pl-12"
           disabled={loading}
+          aria-label="Type your legal request"
         />
-        <Button
-          type="submit"
-          variant="ghost"
-          size="icon"
-          disabled={loading}
-          className="absolute right-2 text-legal-teal hover:text-legal-gold hover:bg-transparent"
+        {/* Microphone button for voice input */}
+        <button
+          type="button"
+          onClick={handleMicClick}
+          className={cn("absolute right-12 p-2 rounded-full text-legal-teal hover:text-legal-gold focus:outline-none focus:ring-2 focus:ring-legal-teal transition", listening && 'bg-legal-teal/20')}
+          aria-label={listening ? "Listening for voice input" : "Start voice input"}
+          tabIndex={0}
         >
-          <ArrowRight className="w-5 h-5" />
-        </Button>
+          <Mic className={cn("w-5 h-5", listening && 'animate-pulse')} />
+        </button>
+        {/* Loading spinner or animated dots */}
+        {loading ? (
+          <span className="absolute right-2 flex items-center" aria-live="polite" aria-label="Loading">
+            <span className="inline-block w-2 h-2 mx-0.5 bg-legal-teal rounded-full animate-bounce [animation-delay:0s]"></span>
+            <span className="inline-block w-2 h-2 mx-0.5 bg-legal-teal rounded-full animate-bounce [animation-delay:0.15s]"></span>
+            <span className="inline-block w-2 h-2 mx-0.5 bg-legal-teal rounded-full animate-bounce [animation-delay:0.3s]"></span>
+          </span>
+        ) : (
+          <Button
+            type="submit"
+            variant="ghost"
+            size="icon"
+            disabled={loading}
+            className="absolute right-2 text-legal-teal hover:text-legal-gold hover:bg-transparent"
+            aria-label="Submit legal request"
+            tabIndex={0}
+          >
+            <ArrowRight className="w-5 h-5" />
+          </Button>
+        )}
       </form>
       <p className="text-xs text-gray-500 mt-2 text-center">
         NeuroClaim AI helps navigate your legal needs
