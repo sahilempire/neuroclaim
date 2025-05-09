@@ -109,7 +109,7 @@ const AppDashboard = () => {
                 >
                   {features[2].description}
                 </p>
-                <a href="#" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
+                <a href="https://radar.neuralarc.ai/" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
               </div>
               {/* Vertical Divider */}
               <div className="hidden md:block h-[329px] w-px bg-white/40 mx-2" />
@@ -127,7 +127,7 @@ const AppDashboard = () => {
                 >
                   {features[1].description}
                 </p>
-                <a href="#" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
+                <a href="https://compli-ai-shield.vercel.app/assessment" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
               </div>
               {/* Vertical Divider */}
               <div className="hidden md:block h-[329px] w-px bg-white/40 mx-2" />
@@ -145,7 +145,7 @@ const AppDashboard = () => {
                 >
                   {features[0].description}
                 </p>
-                <a href="#" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
+                <a href="https://lawbit.ai/" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
               </div>
             </div>
             
