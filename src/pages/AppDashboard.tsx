@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AIInputBox from '@/components/AIInputBox';
 import AIResponse from '@/components/AIResponse';
+import AuthModal from '@/components/AuthModal';
 import legalAI, { AIAnalysisResult } from '@/services/legalAI';
+import { useAuth } from '@/contexts/AuthContext';
 
 const IndexLogo = ({ width = 220, height = 60 }: { width?: number; height?: number }) => (
   <img 
@@ -17,30 +20,29 @@ const IndexLogo = ({ width = 220, height = 60 }: { width?: number; height?: numb
 const features = [
   {
     title: 'AI for Drafting',
-    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.'
+    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.',
+    link: 'https://lawbit.ai/'
   },
   {
     title: 'AI for Compliance',
-    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.'
+    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.',
+    link: 'https://compli-ai-shield.vercel.app/assessment'
   },
   {
     title: 'AI for Trademark',
-    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.'
+    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.',
+    link: 'https://radar.neuralarc.ai/'
   }
 ];
 
 const AppDashboard = () => {
+  const navigate = useNavigate();
+  const { user, session, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<AIAnalysisResult | null>(null);
   const [showAIResponse, setShowAIResponse] = useState(false);
   const [cooldown, setCooldown] = useState(false);
   const responseRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (aiResult && responseRef.current) {
-      responseRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, [aiResult]);
 
   const handleSubmit = async (message: string) => {
     if (loading || cooldown) return;
@@ -55,11 +57,29 @@ const AppDashboard = () => {
     }
   };
 
+  const handleTryNowClick = (link: string) => {
+    // If user is already authenticated, redirect directly
+    if (user && session) {
+      window.location.href = link;
+      return;
+    }
+
+    // If not authenticated, store the target link and redirect to signin
+    localStorage.setItem('redirectAfterAuth', link);
+    navigate('/signin');
+  };
+
+  useEffect(() => {
+    if (aiResult && responseRef.current) {
+      responseRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [aiResult]);
+
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#f7f7f3] fustat">
-      <main className="flex-1 flex flex-col items-center justify-center w-full">
+      <main className="flex-1 flex flex-col items-center justify-start w-full pt-5">
         <div
-          className="w-full max-w-[96vw] rounded-3xl shadow-2xl px-2 md:px-4 py-4 md:py-8 mx-auto flex flex-col items-center relative overflow-hidden mt-4 md:mt-8"
+          className="w-full max-w-[96vw] rounded-3xl shadow-2xl px-2 md:px-4 py-4 md:py-8 mx-auto flex flex-col items-center relative overflow-hidden mb-8"
           style={{
             backgroundImage: 'url(/hero.png)',
             backgroundSize: 'cover',
@@ -95,67 +115,33 @@ const AppDashboard = () => {
             
             {/* Features Section */}
             <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8 mb-12">
-              {/* AI for Trademark (left) */}
-              <div
-                className="flex flex-col items-start justify-center text-left w-[373px] h-[409px] gap-2 rounded-[16px] p-10"
-              >
-                <h3
-                  className="text-white mb-4 fustat font-semibold text-[28px] leading-[28.07px] tracking-[-0.4%] align-middle"
-                >
-                  {features[2].title}
-                </h3>
-                <p
-                  className="text-gray-300 mb-8 fustat font-normal text-[16px] leading-[24.06px] tracking-[0]"
-                >
-                  {features[2].description}
-                </p>
-                <a href="https://radar.neuralarc.ai/" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
-              </div>
-              {/* Vertical Divider */}
-              <div className="hidden md:block h-[329px] w-px bg-white/40 mx-2" />
-              {/* AI for Compliance (center) */}
-              <div
-                className="flex flex-col items-start justify-center text-left w-[373px] h-[409px] gap-2 rounded-[16px] p-10"
-              >
-                <h3
-                  className="text-white mb-4 fustat font-semibold text-[28px] leading-[28.07px] tracking-[-0.4%] align-middle"
-                >
-                  {features[1].title}
-                </h3>
-                <p
-                  className="text-gray-300 mb-8 fustat font-normal text-[16px] leading-[24.06px] tracking-[0]"
-                >
-                  {features[1].description}
-                </p>
-                <a href="https://compli-ai-shield.vercel.app/assessment" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
-              </div>
-              {/* Vertical Divider */}
-              <div className="hidden md:block h-[329px] w-px bg-white/40 mx-2" />
-              {/* AI for Drafting (right) */}
-              <div
-                className="flex flex-col items-start justify-center text-left w-[373px] h-[409px] gap-2 rounded-[16px] p-10"
-              >
-                <h3
-                  className="text-white mb-4 fustat font-semibold text-[28px] leading-[28.07px] tracking-[-0.4%] align-middle"
-                >
-                  {features[0].title}
-                </h3>
-                <p
-                  className="text-gray-300 mb-8 fustat font-normal text-[16px] leading-[24.06px] tracking-[0]"
-                >
-                  {features[0].description}
-                </p>
-                <a href="https://lawbit.ai/" className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block" style={{ fontFamily: 'Inter, sans-serif' }}>Try Now</a>
-              </div>
+              {features.map((feature, index) => (
+                <div key={feature.title} className="flex flex-col items-start justify-center text-left w-[373px] h-[409px] gap-2 rounded-[16px] p-10">
+                  <h3 className="text-white mb-4 fustat font-semibold text-[28px] leading-[28.07px] tracking-[-0.4%] align-middle">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-300 mb-8 fustat font-normal text-[16px] leading-[24.06px] tracking-[0]">
+                    {feature.description}
+                  </p>
+                  <button
+                    onClick={() => handleTryNowClick(feature.link)}
+                    disabled={authLoading}
+                    className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block disabled:opacity-50 disabled:cursor-not-allowed"
+                    style={{ fontFamily: 'Inter, sans-serif' }}
+                  >
+                    {authLoading ? 'Loading...' : 'Try Now'}
+                  </button>
+                </div>
+              ))}
             </div>
             
           </div>
         </div>
       </main>
-      {/* Footer */}
-      <footer className="w-full flex justify-center items-end mt-auto bg-transparent">
+      {/* Footer with proper spacing */}
+      <footer className="w-full mt-auto bg-transparent">
         <div className="w-full bg-[#18181b] rounded-t-2xl px-8 py-5 flex flex-row items-center justify-center text-gray-400 text-[17px] fustat gap-2 flex-wrap" style={{ fontWeight: 400 }}>
-        <img src="/lawbit-l-logo.png" alt="NeuralArc Logo" className="inline-block align-middle h-[24px] w-auto ml-2" />
+          <img src="/lawbit-l-logo.png" alt="NeuralArc Logo" className="inline-block align-middle h-[24px] w-auto ml-2" />
           <span className="mx-2">•</span>
           <a href="#" className="hover:text-white transition underline">Terms of use</a>
           <span className="mx-2">•</span>
