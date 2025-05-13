@@ -21,7 +21,7 @@ const features = [
   {
     title: 'AI for Drafting',
     description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.',
-    link: 'https://lawbit.ai/'
+    link: 'https://lawbit.ai/contracts'
   },
   {
     title: 'AI for Compliance',
@@ -31,7 +31,7 @@ const features = [
   {
     title: 'AI for Trademark',
     description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.',
-    link: 'https://radar.neuralarc.ai/'
+    link: 'https://radar.neuralarc.ai/dashboard'
   }
 ];
 
