@@ -78,14 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     console.log('AuthProvider: Attempting Google sign in...');
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/signin`,
-          queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
-          },
-        },
+        provider: 'google'
       });
 
       if (error) {
@@ -94,7 +87,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (data?.url) {
-        // Store the current URL to redirect back after auth
+        // Store the current URL to redirect back after auth (optional, can be removed if not needed)
         const currentUrl = window.location.href;
         localStorage.setItem('redirectAfterAuth', currentUrl);
         
