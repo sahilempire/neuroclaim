@@ -157,7 +157,7 @@ const AppDashboard = () => {
       {/* Footer with proper spacing */}
       <footer className="w-full mt-auto bg-transparent">
         <div className="w-full bg-[#18181b] rounded-t-2xl px-8 py-5 flex flex-row items-center justify-center text-gray-400 text-[17px] gap-2 flex-wrap" style={{ fontWeight: 400 }}>
-          <img src="/lawbit-l-logo.png" alt="NeuralArc Logo" className="inline-block align-middle h-[24px] w-auto ml-2" />
+          <img src="/lawbit-l-logo.png" alt="NeuralArc Logo" className="inline-block align-middle h-[38px] w-auto ml-2" />
           <span className="mx-2">•</span>
           <a href="#" className="hover:text-white transition underline">Terms of use</a>
           <span className="mx-2">•</span>
