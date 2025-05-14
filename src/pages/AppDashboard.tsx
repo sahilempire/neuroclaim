@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AIInputBox from '@/components/AIInputBox';
 import AIResponse from '@/components/AIResponse';
-import AuthModal from '@/components/AuthModal';
 import legalAI, { AIAnalysisResult } from '@/services/legalAI';
-import { useAuth } from '@/contexts/AuthContext';
 
 const IndexLogo = ({ width = 220, height = 60 }: { width?: number; height?: number }) => (
   <img 
@@ -19,30 +16,40 @@ const IndexLogo = ({ width = 220, height = 60 }: { width?: number; height?: numb
 
 const features = [
   {
-    title: 'AI for Drafting',
-    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.',
-    link: 'https://lawbit.ai/contracts'
+    title: 'Lawbit',
+    subtitle: 'AI for Legal Intelligence',
+    description: 'Create, review and optimize contracts with ease. Lawbit streamlines every step of legal drafting from patent generation to compliance management.',
+    icon: '/lawbit-l-logo.png',
+    link: 'https://lawbit.ai/'
   },
   {
-    title: 'AI for Compliance',
-    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.',
+    title: 'Becan',
+    subtitle: 'AI for Compliance',
+    description: 'Automate compliance checks and risk assessments. CompliAI helps you stay ahead of regulations and manage compliance effortlessly.',
+    icon: '/compli-logo.png',
     link: 'https://compli-ai-shield.vercel.app/assessment'
   },
   {
-    title: 'AI for Trademark',
-    description: 'LawBit simplifies contract creation and analysis with AI-powered accuracy. Effortlessly draft, review, and optimize legal documents in seconds.',
-    link: 'https://radar.neuralarc.ai/dashboard'
+    title: 'Radar',
+    subtitle: 'AI for Trademark and Patent',
+    description: 'Protect your intellectual property with Radar. Instantly search, analyze, and monitor trademarks with AI-powered precision.',
+    icon: '/radar-logo.png',
+    link: 'https://radar.neuralarc.ai/'
   }
 ];
 
 const AppDashboard = () => {
-  const navigate = useNavigate();
-  const { user, session, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(false);
   const [aiResult, setAiResult] = useState<AIAnalysisResult | null>(null);
   const [showAIResponse, setShowAIResponse] = useState(false);
   const [cooldown, setCooldown] = useState(false);
   const responseRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (aiResult && responseRef.current) {
+      responseRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [aiResult]);
 
   const handleSubmit = async (message: string) => {
     if (loading || cooldown) return;
@@ -56,24 +63,6 @@ const AppDashboard = () => {
       setTimeout(() => setCooldown(false), 5000);
     }
   };
-
-  const handleTryNowClick = (link: string) => {
-    // If user is already authenticated, redirect directly
-    if (user && session) {
-      window.location.href = link;
-      return;
-    }
-
-    // If not authenticated, store the target link and redirect to signin
-    localStorage.setItem('redirectAfterAuth', link);
-    navigate('/signin');
-  };
-
-  useEffect(() => {
-    if (aiResult && responseRef.current) {
-      responseRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, [aiResult]);
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#f7f7f3] fustat">
@@ -93,7 +82,8 @@ const AppDashboard = () => {
             >
               Unlock AI-Powered Legal Brilliance for Instantly Navigate Patents, Trademarks, Contracts, and Compliance with NeuralArc.
             </h1>
-            {/* AI Input/Response Section (Search Bar) */}
+            
+            {/* Commented out search bar functionality
             <div className="w-full max-w-4xl">
               <AIInputBox 
                 onSubmit={handleSubmit} 
@@ -112,29 +102,50 @@ const AppDashboard = () => {
                 </div>
               )}
             </div>
+            */}
             
-            {/* Features Section */}
-            <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8 mb-12">
+            {/* Enhanced Features Section - now styled as per reference image */}
+            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3 px-4 mb-12">
               {features.map((feature, index) => (
-                <div key={feature.title} className="flex flex-col items-start justify-center text-left w-[373px] h-[409px] gap-2 rounded-[16px] p-10">
-                  <h3 className="text-white mb-4 fustat font-semibold text-[28px] leading-[28.07px] tracking-[-0.4%] align-middle">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-300 mb-8 fustat font-normal text-[16px] leading-[24.06px] tracking-[0]">
-                    {feature.description}
-                  </p>
-                  <button
-                    onClick={() => handleTryNowClick(feature.link)}
-                    disabled={authLoading}
-                    className="px-8 py-3 rounded-full bg-white text-black font-semibold text-lg shadow hover:bg-gray-200 transition inline-block disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
-                  >
-                    {authLoading ? 'Loading...' : 'Try Now'}
-                  </button>
-                </div>
+                <a
+                  key={index}
+                  href={feature.link}
+                  className="relative group flex flex-col justify-between w-full max-w-[370px] h-[340px] bg-gradient-to-br from-[#232323] to-[#232323ee] rounded-3xl p-7 shadow-lg transition-transform duration-300 hover:scale-[1.04] hover:shadow-2xl border border-[#444] hover:border-[#666] overflow-hidden mx-auto"
+                  style={{ minWidth: 0 }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {/* Subtle pattern/lines background (optional SVG or CSS) */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <svg width="100%" height="100%" className="opacity-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" preserveAspectRatio="none">
+                      {/* Only inner rect, well inset from edges */}
+                      <rect x="48" y="48" width="224" height="224" rx="20" fill="none" stroke="#fff" strokeWidth="0.5" />
+                    </svg>
+                  </div>
+                  {/* Heading and Subheading top left (replacing logo) */}
+                  <div className="mb-3 z-10">
+                    <h3 className="text-white text-[1.5rem] font-bold mb-1 fustat leading-tight">{feature.title}</h3>
+                    <div className="text-[#e0e0e0] text-base font-medium fustat leading-snug">{feature.subtitle}</div>
+                  </div>
+                  {/* Arrow top right */}
+                  <div className="absolute top-6 right-6 z-20">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-transparent group-hover:bg-[#333] transition-colors duration-200">
+                      <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* Single solid white circle */}
+                        <circle cx="20" cy="20" r="13" stroke="#fff" strokeWidth="2.5" />
+                        {/* Arrow */}
+                        <path d="M16 24 L24 16" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                        <path d="M18.5 16H24V21.5" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                  {/* Content */}
+                  <div className="z-10 mt-auto flex flex-col justify-end h-full">
+                    <p className="text-[#bdbdbd] text-[1rem] leading-relaxed fustat mt-4">{feature.description}</p>
+                  </div>
+                </a>
               ))}
             </div>
-            
           </div>
         </div>
       </main>
