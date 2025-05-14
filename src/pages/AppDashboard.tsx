@@ -31,7 +31,7 @@ const features = [
   },
   {
     title: 'Radar',
-    subtitle: 'AI for Trademark and Patent',
+    subtitle: 'AI for Trademark & Patent',
     description: 'Protect your intellectual property with Radar. Instantly search, analyze, and monitor trademarks with AI-powered precision.',
     icon: '/radar-logo.png',
     link: 'https://radar.neuralarc.ai/'
@@ -68,7 +68,7 @@ const AppDashboard = () => {
     <div className="min-h-screen w-full flex flex-col bg-[#f7f7f3] fustat">
       <main className="flex-1 flex flex-col items-center justify-start w-full pt-5">
         <div
-          className="w-full max-w-screen-xl rounded-3xl shadow-2xl px-4 md:px-8 lg:px-16 py-4 md:py-8 lg:py-12 mx-auto flex flex-col items-center relative overflow-hidden mb-8"
+          className="w-full max-w-[96vw] rounded-3xl shadow-2xl px-2 md:px-4 py-4 md:py-8 mx-auto flex flex-col items-center relative overflow-hidden mb-8"
           style={{
             backgroundImage: 'url(/hero.png)',
             backgroundSize: 'cover',
@@ -77,7 +77,9 @@ const AppDashboard = () => {
         >
           <div className="relative z-10 flex flex-col items-center justify-center w-full">
             <IndexLogo />
-            <h1 className="mb-10 mx-auto text-center w-full max-w-4xl text-white fustat font-normal text-2xl md:text-3xl lg:text-4xl leading-[1.2] tracking-[0]">
+            <h1
+              className="mb-10 mx-auto text-center w-[902px] h-[84px] text-white fustat font-normal text-[24px] leading-[42px] tracking-[0]"
+            >
               Unlock AI-Powered Legal Brilliance for Instantly Navigate Patents, Trademarks, Contracts, and Compliance with NeuralArc.
             </h1>
             
@@ -103,13 +105,13 @@ const AppDashboard = () => {
             */}
             
             {/* Enhanced Features Section - now styled as per reference image */}
-            <div className="w-full max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 px-0 md:px-4 mb-12 items-stretch">
+            <div className="w-full max-w-6xl xl:max-w-7xl 2xl:max-w-[1800px] mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-12 2xl:gap-16 px-4 mb-12 items-stretch">
                 {features.map((feature, index) => (
                   <a
                     key={index}
                     href={feature.link}
-                    className="relative flex flex-col w-full max-w-[400px] h-auto bg-[#232323] rounded-2xl p-6 md:p-8 shadow-lg transition-transform duration-300 hover:scale-[1.03] hover:shadow-2xl border border-[#353535] overflow-hidden mx-auto card-inner-shadow"
+                    className="relative flex flex-col w-full max-w-[370px] h-full bg-[#232323] rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-[1.03] hover:shadow-2xl border border-[#353535] overflow-hidden mx-auto card-inner-shadow xl:max-w-[420px] 2xl:max-w-[500px]"
                     style={{ minWidth: 0 }}
                     target="_blank"
                     rel="noopener noreferrer"
