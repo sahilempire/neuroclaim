@@ -105,46 +105,48 @@ const AppDashboard = () => {
             */}
             
             {/* Enhanced Features Section - now styled as per reference image */}
-            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3 px-4 mb-12">
-              {features.map((feature, index) => (
-                <a
-                  key={index}
-                  href={feature.link}
-                  className="relative group flex flex-col justify-between w-full max-w-[370px] h-[340px] bg-gradient-to-br from-[#232323] to-[#232323ee] rounded-3xl p-7 shadow-lg transition-transform duration-300 hover:scale-[1.04] hover:shadow-2xl border border-[#444] hover:border-[#666] overflow-hidden mx-auto"
-                  style={{ minWidth: 0 }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {/* Subtle pattern/lines background (optional SVG or CSS) */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <svg width="100%" height="100%" className="opacity-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" preserveAspectRatio="none">
-                      {/* Only inner rect, well inset from edges */}
-                      <rect x="48" y="48" width="224" height="224" rx="20" fill="none" stroke="#fff" strokeWidth="0.5" />
-                    </svg>
-                  </div>
-                  {/* Heading and Subheading top left (replacing logo) */}
-                  <div className="mb-3 z-10">
-                    <h3 className="text-white text-[1.5rem] font-bold mb-1 fustat leading-tight">{feature.title}</h3>
-                    <div className="text-[#e0e0e0] text-base font-medium fustat leading-snug">{feature.subtitle}</div>
-                  </div>
-                  {/* Arrow top right */}
-                  <div className="absolute top-6 right-6 z-20">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-transparent group-hover:bg-[#333] transition-colors duration-200">
-                      <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        {/* Single solid white circle */}
-                        <circle cx="20" cy="20" r="13" stroke="#fff" strokeWidth="2.5" />
-                        {/* Arrow */}
-                        <path d="M16 24 L24 16" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
-                        <path d="M18.5 16H24V21.5" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+            <div className="w-full max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 mb-12">
+                {features.map((feature, index) => (
+                  <a
+                    key={index}
+                    href={feature.link}
+                    className="relative group flex flex-col justify-between w-full max-w-[370px] h-[340px] bg-[#232323] rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-[1.03] hover:shadow-2xl border border-[#353535] overflow-hidden mx-auto"
+                    style={{ minWidth: 0 }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {/* Subtle pattern/lines background (optional SVG or CSS) */}
+                    <div className="absolute inset-0 pointer-events-none">
+                      <svg width="100%" height="100%" className="opacity-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" preserveAspectRatio="none">
+                        {/* Only inner rect, well inset from edges */}
+                        <rect x="48" y="48" width="224" height="224" rx="16" fill="none" stroke="#fff" strokeWidth="0.5" />
                       </svg>
                     </div>
-                  </div>
-                  {/* Content */}
-                  <div className="z-10 mt-auto flex flex-col justify-end h-full">
-                    <p className="text-[#bdbdbd] text-[1rem] leading-relaxed fustat mt-4">{feature.description}</p>
-                  </div>
-                </a>
-              ))}
+                    {/* Heading and Subheading top left (replacing logo) */}
+                    <div className="mb-4 z-10">
+                      <h3 className="text-white text-[1.7rem] font-bold mb-1 fustat leading-tight">{feature.title}</h3>
+                      <div className="text-[#e0e0e0] text-lg font-medium fustat leading-snug">{feature.subtitle}</div>
+                    </div>
+                    {/* Arrow top right */}
+                    <div className="absolute top-6 right-6 z-20">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-transparent group-hover:bg-[#333] transition-colors duration-200">
+                        <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          {/* Single solid white circle */}
+                          <circle cx="20" cy="20" r="13" stroke="#fff" strokeWidth="2.5" />
+                          {/* Arrow */}
+                          <path d="M16 24 L24 16" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                          <path d="M18.5 16H24V21.5" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                    {/* Content */}
+                    <div className="z-10 mt-auto flex flex-col justify-end h-full">
+                      <p className="text-[#bdbdbd] text-base leading-relaxed fustat mt-4">{feature.description}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
