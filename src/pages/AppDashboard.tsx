@@ -17,7 +17,7 @@ const IndexLogo = ({ width = 220, height = 60 }: { width?: number; height?: numb
 const features = [
   {
     title: 'Lawbit',
-    subtitle: 'AI for Legal Intelligence',
+    subtitle: 'AI for Legal Drafting',
     description: 'Create, review and optimize contracts with ease. Lawbit streamlines every step of legal drafting from patent generation to compliance management.',
     icon: '/lawbit-l-logo.png',
     link: 'https://lawbit.ai/'
@@ -25,13 +25,13 @@ const features = [
   {
     title: 'Becan',
     subtitle: 'AI for Compliance',
-    description: 'Automate compliance checks and risk assessments. CompliAI helps you stay ahead of regulations and manage compliance effortlessly.',
+    description: 'Automate compliance checks and risk assessments. Becan helps you stay ahead of regulations and manage compliance effortlessly.',
     icon: '/compli-logo.png',
     link: 'https://compli-ai-shield.vercel.app/assessment'
   },
   {
     title: 'Radar',
-    subtitle: 'AI for Trademark and Patent',
+    subtitle: 'AI for Trademark & Patent',
     description: 'Protect your intellectual property with Radar. Instantly search, analyze, and monitor trademarks with AI-powered precision.',
     icon: '/radar-logo.png',
     link: 'https://radar.neuralarc.ai/'
