@@ -18,7 +18,7 @@ const features = [
   {
     title: 'Lawbit',
     subtitle: 'AI for Legal Drafting',
-    description: 'Create, review and optimize contracts with ease. Lawbit streamlines every step of legal drafting from patent generation to compliance management.',
+    description: 'Empowering your legal processes with AI to draft, analyze, and optimize contracts quickly and accurately, ensuring clarity, precision, and confidence every step of the way.',
     icon: '/lawbit-l-logo.png',
     link: 'https://lawbit.ai/'
   },
@@ -32,7 +32,7 @@ const features = [
   {
     title: 'Radar',
     subtitle: 'AI for Trademark & Patent',
-    description: 'Protect your intellectual property with Radar. Instantly search, analyze, and monitor trademarks with AI-powered precision.',
+    description: 'Protect your intellectual property with Radar. Instantly search, analyze, and monitor trademarks and patents with AI-powered precision.',
     icon: '/radar-logo.png',
     link: 'https://radar.neuralarc.ai/'
   }
