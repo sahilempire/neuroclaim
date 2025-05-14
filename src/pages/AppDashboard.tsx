@@ -133,10 +133,10 @@ const AppDashboard = () => {
                       <div className="w-12 h-12 flex items-center justify-center rounded-full bg-transparent group-hover:bg-[#333] transition-colors duration-200">
                         <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                           {/* Single solid white circle */}
-                          <circle cx="20" cy="20" r="13" stroke="#fff" strokeWidth="2.5" />
+                          <circle cx="20" cy="20" r="13" stroke="#fff" strokeWidth="1.2" />
                           {/* Arrow */}
-                          <path d="M16 24 L24 16" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
-                          <path d="M18.5 16H24V21.5" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                          <path d="M16 24 L24 16" stroke="#fff" strokeWidth="1.2" strokeLinecap="round"/>
+                          <path d="M18.5 16H24V21.5" stroke="#fff" strokeWidth="1.2" strokeLinecap="round"/>
                         </svg>
                       </div>
                     </div>
