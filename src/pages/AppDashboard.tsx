@@ -105,14 +105,13 @@ const AppDashboard = () => {
             */}
             
             {/* Enhanced Features Section - now styled as per reference image */}
-            <div className="w-full max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 mb-12 items-stretch">
+            <div className="w-full max-w-screen-xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 px-4 mb-12 items-stretch">
                 {features.map((feature, index) => (
                   <a
                     key={index}
                     href={feature.link}
-                    className="relative flex flex-col w-full max-w-[370px] h-full bg-[#232323] rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-[1.03] hover:shadow-2xl border border-[#353535] overflow-hidden mx-auto card-inner-shadow"
-                    style={{ minWidth: 0 }}
+                    className="relative flex flex-col w-full max-w-[370px] h-full bg-[#232323] rounded-2xl p-8 shadow-lg transition-transform duration-300 hover:scale-[1.03] hover:shadow-2xl border border-[#353535] overflow-hidden mx-auto card-inner-shadow lg:max-w-[420px]"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
