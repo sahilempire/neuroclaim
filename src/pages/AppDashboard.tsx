@@ -20,7 +20,7 @@ const features = [
     subtitle: 'AI for Legal Drafting',
     description: 'Empowering your legal processes with AI to draft, analyze, and optimize contracts quickly and accurately, ensuring clarity, precision, and confidence every step of the way.',
     icon: '/lawbit-l-logo.png',
-    link: 'https://lawbit.ai/'
+    link: 'https://lawbit.neuralpaths.ai/'
   },
   {
     title: 'Becan',
@@ -34,7 +34,7 @@ const features = [
     subtitle: 'AI for Trademark & Patent',
     description: 'Protect your intellectual property with Radar. Instantly search, analyze, and monitor trademarks and patents with AI-powered precision.',
     icon: '/radar-logo.png',
-    link: 'https://radar.neuralarc.ai/'
+    link: 'https://radar.neuralpaths.ai/'
   }
 ];
 
